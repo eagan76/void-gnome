@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Install GNOME and GDM
+echo "Installing GNOME desktop environment and GDM..."
+sudo xbps-install -S gnome gdm
+
+# Enable GDM as the display manager
+echo "Enabling GDM as the display manager..."
+sudo ln -s /etc/sv/gdm /var/service
+
+# Ensure dbus is enabled and running
+echo "Ensuring dbus is enabled and running..."
+if [ ! -L /var/service/dbus ]; then
+    sudo ln -s /etc/sv/dbus /var/service
+fi
+
+echo "GNOME and GDM installation complete. Rebooting is recommended to apply all changes."
